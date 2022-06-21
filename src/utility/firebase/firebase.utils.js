@@ -2,9 +2,15 @@
 // import "firebase/compat/firestore";
 // import "firebase/compat/auth";
 
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithRedirect,
+} from "firebase/auth";
+import { initializeApp } from "firebase/app";
 
-import {getAuth,signInWithPopup,GoogleAuthProvider,signInWithRedirect} from 'firebase/auth'
-import {initializeApp} from 'firebase/app';
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 const config = {
   apiKey: "AIzaSyBcOInsUxDbVD3o0wqr3FO6FA1Z9LDzHSE",
@@ -18,10 +24,10 @@ const config = {
 
 const firebaseapp = initializeApp(config);
 const provider = new GoogleAuthProvider();
-
+// const redirectProvider = new signInWithRedirect(config);
 provider.setCustomParameters({
-    prompt:'select_account',
-})
+  prompt: "select_account",
+});
 
 // // to save google user data
 // export const createUserProfileDocument = async(userAuth, additionalData)=>{
@@ -46,7 +52,6 @@ provider.setCustomParameters({
 //   return userRef;
 // };
 
-
 // firebase.initializeApp(config);
 
 // export const auth = firebase.auth();
@@ -57,7 +62,32 @@ provider.setCustomParameters({
 
 // export default firebase;
 
-
 export const auth = getAuth();
-export const signInWithGooglePopup =()=> signInWithPopup(auth,provider)
- 
+export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signInWithGoogleRedirect = () =>
+  signInWithRedirect(auth, provider);
+
+export const db = getFirestore();
+
+export const createUserDocFromAuth = async (userAuth) => {
+  const userDocRef = doc(db, "users", userAuth.uid);
+  console.log(userDocRef);
+  const userSnapshot = await getDoc(userDocRef);
+  console.log(userSnapshot);
+  console.log(userSnapshot.exists()); // to check wheather document exist or not
+
+  //if user data exist not
+  if (!userSnapshot.exists()) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+    try {
+      await setDoc(userDocRef, { displayName, email, createdAt });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+  return userDocRef;
+  //return user document refrence
+
+  //create set  document with the data from user auth in my collection if not exist
+};
