@@ -7,6 +7,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   signInWithRedirect,
+  createUserWithEmailAndPassword
 } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 
@@ -91,3 +92,11 @@ export const createUserDocFromAuth = async (userAuth) => {
 
   //create set  document with the data from user auth in my collection if not exist
 };
+
+
+export const createAuthUserWithEmailAndPassword = async(email,password)=>{
+  if(!email||!password) return;
+ 
+  return await createUserWithEmailAndPassword(auth, email,password)
+
+}
