@@ -70,7 +70,9 @@ export const signInWithGoogleRedirect = () =>
 
 export const db = getFirestore();
 
-export const createUserDocFromAuth = async (userAuth) => {
+export const createUserDocFromAuth = async (userAuth, additionalInformation = { displayName: '' }) => {
+  if (!userAuth) return;
+
   const userDocRef = doc(db, "users", userAuth.uid);
   console.log(userDocRef);
   const userSnapshot = await getDoc(userDocRef);
@@ -79,10 +81,10 @@ export const createUserDocFromAuth = async (userAuth) => {
 
   //if user data exist not
   if (!userSnapshot.exists()) {
-    const { displayName, email } = userAuth;
+    const { displayName, email, ...additionalInformation } = userAuth;
     const createdAt = new Date();
     try {
-      await setDoc(userDocRef, { displayName, email, createdAt });
+      await setDoc(userDocRef, { displayName, email, createdAt, ...additionalInformation });
     } catch (error) {
       console.log(error.message);
     }
@@ -94,9 +96,9 @@ export const createUserDocFromAuth = async (userAuth) => {
 };
 
 
-export const createAuthUserWithEmailAndPassword = async(email,password)=>{
-  if(!email||!password) return;
- 
-  return await createUserWithEmailAndPassword(auth, email,password)
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await createUserWithEmailAndPassword(auth, email, password)
 
 }

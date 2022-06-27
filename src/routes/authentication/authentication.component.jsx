@@ -1,13 +1,15 @@
 import React from "react";
 import { useEffect } from "react";
 import { getRedirectResult } from "firebase/auth";
+import SignInForm from "../../components/sign-in/sign-in-form.component";
+import SignUpForm from "../../components/sign-up/sign-up-form-component";
+
 import {
   auth,
   signInWithGooglePopup,
   signInWithGoogleRedirect,
   createUserDocFromAuth,
 } from "../../utility/firebase/firebase.utils";
-import SignUpForm from "../../components/sign-up/sign-up-form-component";
 
 const Signin = () => {
   useEffect(() => {
@@ -33,12 +35,13 @@ const Signin = () => {
   // };
   return (
     <div>
-      <h1>Sign In</h1>
+      <SignInForm />
+
       <button onClick={logGoogleUser}>Sign In with Google Popup</button>
       <button onClick={signInWithGoogleRedirect}>
         Sign In with Google Redirect
       </button>
-      <SignUpForm/>
+      <SignUpForm />
     </div>
   );
 };
