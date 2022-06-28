@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { getRedirectResult } from "firebase/auth";
 import SignInForm from "../../components/sign-in/sign-in-form.component";
 import SignUpForm from "../../components/sign-up/sign-up-form-component";
-
+import './authentication.styles.scss'
 import {
   auth,
   signInWithGooglePopup,
@@ -34,13 +34,9 @@ const Signin = () => {
   //   console.log(response.user);
   // };
   return (
-    <div>
-      <SignInForm />
-
-      <button onClick={logGoogleUser}>Sign In with Google Popup</button>
-      <button onClick={signInWithGoogleRedirect}>
-        Sign In with Google Redirect
-      </button>
+    <div className="authentication-container">
+      
+      <SignInForm />   
       <SignUpForm />
     </div>
   );
