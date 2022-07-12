@@ -3,7 +3,7 @@ import { useState,useContext } from "react";
 import "./sign-up-form.styles.scss";
 import Button from "../button/button.component";
 import FormInput from "../../components/form-input/form-input.commponent";
-import {UserContext} from '../../components/context/user.context'
+import {UserContext} from '../../context/user.context'
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocFromAuth,

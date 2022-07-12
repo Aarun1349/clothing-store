@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import Button from "../button/button.component";
-import { CartItemContext } from "../context/cartItem.context";
+import { CartItemContext } from "../../context/cartItem.context";
 import "./product-card.styles.scss";
 // import "./product-card.styles.scss";
 const ProductCard = ({ product }) => {
   const { imageUrl, id, name, price } = product;
-  // console.log(product);
+
   const { addItemToCart } = useContext(CartItemContext);
   const addProductToCart = () => addItemToCart(product);
   return (
