@@ -12,12 +12,15 @@ const Category = () => {
     setProducts(categories[category]);
   }, [categories, category]);
   return (
-    <div className="category-container">
-      {products &&
-        products.map((product) => {
-          return <ProductCard key={product.is} product={product} />;
-        })}
-    </div>
+    <>
+      <h2 className="category-title">{category}</h2>
+      <div className="category-container">
+        {products &&
+          products.map((product) => {
+            return <ProductCard key={product.is} product={product} />;
+          })}
+      </div>
+    </>
   );
 };
 

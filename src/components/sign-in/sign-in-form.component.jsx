@@ -1,7 +1,7 @@
 // import { async } from "@firebase/util";
 import { useState, useContext } from "react";
 import "./sign-in-form.styles.scss";
-import Button from "../button/button.component";
+import Button,{BUTTON_TYPE_CLASSES} from "../button/button.component";
 import { UserContext } from "../../context/user.context";
 import FormInput from "../../components/form-input/form-input.commponent";
 import {
@@ -71,12 +71,12 @@ const SignInForm = () => {
             required
           />
           <div className="buttons-container">
-            <Button type="submit" childern="SignIn" />
+            <Button type="submit" buttonType={BUTTON_TYPE_CLASSES.base} children="SignIn" />
             <Button
               onClick={signInWithGoogle}
-              buttonType="google"
+              buttonType={BUTTON_TYPE_CLASSES.google}
               type="button"
-              childern="Google SignIn"
+              children="Google SignIn"
             />
           </div>
         </form>

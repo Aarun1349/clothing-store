@@ -1,7 +1,7 @@
 // import { async } from "@firebase/util";
 import { useState,useContext } from "react";
 import "./sign-up-form.styles.scss";
-import Button from "../button/button.component";
+import Button,{BUTTON_TYPE_CLASSES} from "../button/button.component";
 import FormInput from "../../components/form-input/form-input.commponent";
 import {UserContext} from '../../context/user.context'
 import {
@@ -89,7 +89,7 @@ const SignUpForm = () => {
             required
           />
 
-          <Button childern=" Sign Up" type="submit" />
+          <Button buttonType={BUTTON_TYPE_CLASSES.base} children=" Sign Up" type="submit" />
         </form>
       </div>
     </>
