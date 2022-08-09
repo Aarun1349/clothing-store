@@ -11,14 +11,14 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      {/* <UserProvider> */}
+      <UserProvider>
       <CategoryProvider>
         <CartItemProvider>
           <App />
         </CartItemProvider>
       </CategoryProvider>
 
-      {/* </UserProvider> */}
+      </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
